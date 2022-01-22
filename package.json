@@ -1,0 +1,14 @@
+{
+  "name": "roamai-task",
+  "version": "1.0.0",
+  "description": "this shows map plot of location data recieved",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Subham Shaw",
+  "license": "ISC",
+  "dependencies": {
+    "mqtt": "^4.3.4"
+  }
+}
