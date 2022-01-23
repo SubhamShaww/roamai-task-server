@@ -4,35 +4,26 @@ const mqtt = require("mqtt"); // require mqtt
 
 const host = "broker.hivemq.com";
 const port = "1883";
+// const port = "8000";
 const connectUrl = `mqtt://${host}:${port}`;
 
 const client = mqtt.connect(connectUrl); // create a client
 
 client.on("connect", function () {
-  client.subscribe("location", function (err) {
+  fs.readFile(path.join(__dirname, "map.geojson"), (err, data) => {
     if (!err) {
-      fs.readFile(path.join(__dirname, "map.geojson"), (err, data) => {
-        if (!err) {
-          const parsedData = JSON.parse(data);
+      const parsedData = JSON.parse(data);
 
-          // getting random index from mocked geojson data for publishing different cordinate points of the mocked geosjson data each time.
-          const randomIndex = Math.floor(
-            Math.random() * parsedData.features.length
-          );
+      setInterval(() => {
+        const randomIndex = Math.floor(
+          Math.random() * parsedData.features.length
+        );
 
-          client.publish(
-            "location",
-            JSON.stringify(parsedData.features[randomIndex])
-          );
-        }
-      });
+        client.publish(
+          "location",
+          JSON.stringify(parsedData.features[randomIndex])
+        );
+      }, 30000);
     }
   });
-});
-
-client.on("message", function (topic, message) {
-  // message is Buffer
-  console.log("topic:", topic);
-  console.log("message:", message.toString());
-  client.end();
 });
