@@ -9,6 +9,7 @@
   "author": "Subham Shaw",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^14.2.0",
     "mqtt": "^4.3.4"
   }
 }

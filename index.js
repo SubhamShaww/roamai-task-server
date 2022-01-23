@@ -1,10 +1,10 @@
+require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 const mqtt = require("mqtt"); // require mqtt
 
-const host = "broker.hivemq.com";
-const port = "1883";
-// const port = "8000";
+const host = process.env.HOST;
+const port = process.env.PORT;
 const connectUrl = `mqtt://${host}:${port}`;
 
 const client = mqtt.connect(connectUrl); // create a client
